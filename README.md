@@ -1,6 +1,6 @@
 # shopping_list
 
-A new Flutter project.
+Shopping List App
 
 ## Getting Started
 
