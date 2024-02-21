@@ -48,6 +48,7 @@ class _NewItemState extends State<NewItem> {
       final Map<String, dynamic> resData = jsonDecode(response.body);
 
       if (response.statusCode == 200 && context.mounted) {
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pop(
           GroceryItem(
             id: resData['name'],
