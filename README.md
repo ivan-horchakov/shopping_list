@@ -1,12 +1,8 @@
-# shopping_list
+# Shopping List Flutter App
 
-Shopping List App
+This app was built during passing the [Sections 11](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/37213734#overview) & [12](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/learn/lecture/37215130#overview) of the "Flutter & Dart - The Complete Guide [2024 Edition.]" course.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+A few useful resources:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
