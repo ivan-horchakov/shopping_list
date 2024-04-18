@@ -20,6 +20,9 @@ class _GroceryListState extends State<GroceryList> {
   var _isLoading = true;
   String? _error;
 
+  //TODO: if it isn't working - update Rules
+  final String _realtimeDB = 'flutter-prep-8abca-default-rtdb.europe-west1';
+
   @override
   void initState() {
     super.initState();
@@ -28,7 +31,7 @@ class _GroceryListState extends State<GroceryList> {
 
   void _loadItems() async {
     final url = Uri.https(
-      'flutter-prep-8abca-default-rtdb.europe-west1.firebasedatabase.app',
+      '$_realtimeDB.firebasedatabase.app',
       'shopping-list.json',
     );
 
@@ -100,7 +103,7 @@ class _GroceryListState extends State<GroceryList> {
     });
 
     final url = Uri.https(
-      'flutter-prep-8abca-default-rtdb.europe-west1.firebasedatabase.app',
+      '$_realtimeDB.firebasedatabase.app',
       'shopping-list/${item.id}.json',
     );
     final response = await http.delete(url);
@@ -110,31 +113,18 @@ class _GroceryListState extends State<GroceryList> {
         _groceryItems.insert(index, item);
       });
     }
-
-    // ScaffoldMessenger.of(context).clearSnackBars();
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     duration: const Duration(seconds: 3),
-    //     content: const Text('Grocery deleted.'),
-    //     action: SnackBarAction(
-    //       label: 'Undo',
-    //       onPressed: () {
-    //         setState(() {
-    //           _groceryItems.insert(index, item);
-    //         });
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 
   @override
   Widget build(BuildContext context) {
+    const double textScaler = 1.0;
+
     // No groceries
     Widget content = const Center(
       child: Text(
         'No groceries - star adding some!',
         style: TextStyle(fontSize: 18),
+        textScaler: TextScaler.linear(textScaler),
       ),
     );
 
@@ -165,10 +155,14 @@ class _GroceryListState extends State<GroceryList> {
                 size: 36,
                 color: _groceryItems[index].category.color,
               ),
-              title: Text(_groceryItems[index].name),
+              title: Text(
+                _groceryItems[index].name,
+                textScaler: const TextScaler.linear(textScaler),
+              ),
               trailing: Text(
                 _groceryItems[index].quantity.toString(),
                 style: const TextStyle(fontSize: 15),
+                textScaler: const TextScaler.linear(textScaler),
               ),
             ),
           );

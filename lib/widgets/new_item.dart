@@ -23,6 +23,9 @@ class _NewItemState extends State<NewItem> {
   var _selectedCategory = categories[Categories.dairy]!;
   var _isSending = false;
 
+  //TODO: if it isn't working - update Rules
+  final String _realtimeDB = 'flutter-prep-8abca-default-rtdb.europe-west1';
+
   void _saveItem() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -30,7 +33,7 @@ class _NewItemState extends State<NewItem> {
         _isSending = true;
       });
       final url = Uri.https(
-        'flutter-prep-8abca-default-rtdb.europe-west1.firebasedatabase.app',
+        '$_realtimeDB.firebasedatabase.app',
         'shopping-list.json',
       );
       final response = await http.post(
@@ -63,9 +66,14 @@ class _NewItemState extends State<NewItem> {
 
   @override
   Widget build(BuildContext context) {
+    const double textScaler = 1.0;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add a new item'),
+        title: const Text(
+          'Add a new item',
+          textScaler: TextScaler.linear(textScaler),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -77,7 +85,10 @@ class _NewItemState extends State<NewItem> {
               TextFormField(
                 maxLength: 50,
                 decoration: const InputDecoration(
-                  label: Text('Name'),
+                  label: Text(
+                    'Name',
+                    textScaler: TextScaler.linear(textScaler),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty || value.trim().length <= 1 || value.trim().length > 50) {
@@ -97,6 +108,7 @@ class _NewItemState extends State<NewItem> {
                       decoration: const InputDecoration(
                         label: Text(
                           'Quantity',
+                          textScaler: TextScaler.linear(textScaler),
                         ),
                       ),
                       initialValue: _enteredQuantity.toString(),
@@ -114,9 +126,7 @@ class _NewItemState extends State<NewItem> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    width: 9,
-                  ),
+                  const SizedBox(width: 9),
                   Expanded(
                     child: DropdownButtonFormField(
                       value: _selectedCategory,
@@ -132,7 +142,10 @@ class _NewItemState extends State<NewItem> {
                                   color: category.value.color,
                                 ),
                                 const SizedBox(width: 6),
-                                Text(category.value.title),
+                                Text(
+                                  category.value.title,
+                                  textScaler: const TextScaler.linear(textScaler),
+                                ),
                               ],
                             ),
                           ),
@@ -156,7 +169,10 @@ class _NewItemState extends State<NewItem> {
                         : () {
                             _formKey.currentState!.reset();
                           },
-                    child: const Text('Reset'),
+                    child: const Text(
+                      'Reset',
+                      textScaler: TextScaler.linear(textScaler),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: _isSending ? null : _saveItem,
@@ -166,7 +182,10 @@ class _NewItemState extends State<NewItem> {
                             width: 16,
                             child: CircularProgressIndicator(),
                           )
-                        : const Text('Add Item'),
+                        : const Text(
+                            'Add Item',
+                            textScaler: TextScaler.linear(textScaler),
+                          ),
                   ),
                 ],
               ),

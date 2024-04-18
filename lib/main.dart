@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shopping_list/widgets/grocery_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (value) => runApp(const ShoppingListApp()),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ShoppingListApp extends StatelessWidget {
+  const ShoppingListApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Groceries',
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
